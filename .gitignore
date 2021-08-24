@@ -1,2 +1,4 @@
 *.exe
 C_demo/.vscode/*
+ssh_key_125
+.vscode/*
