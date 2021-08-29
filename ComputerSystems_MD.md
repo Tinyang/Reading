@@ -42,6 +42,12 @@ We will see shortly why i has offset 4 in S3 rather than 1, and why v has offset
 
     With this encoding, however, there is no way to determine whether a given node is a leaf or an internal node. A common method is to introduce an enumerated type defining the different possible choices for the union, and then create a structure containing a tag field and the union:
 
+    3.9.3 Data Alignment
+    Many computer systems place restrictions on the allowable address for the primitive data types, requiring that the address for some objects must be a multiple of some value K(typically2,4,or 8). Such alignment restrictions simplify the design of the hardware forming the interface between the processor and the memory system. For example, suppose a processor always fetches 8 bytes from memory with an address that must be a multiple of 8. If we can guarantee that any double will be aligned to have its address be a multiple of 8, then the value can be read or written with a single memory operation. Otherwise, we may need to perform two memory accesses, since the object might be split scross two 8-byte memory blocks.
+    //leaq instruction support only 8 bytes
+        tH
+
+
 
 
 
