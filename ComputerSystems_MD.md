@@ -45,8 +45,32 @@ We will see shortly why i has offset 4 in S3 rather than 1, and why v has offset
     3.9.3 Data Alignment
     Many computer systems place restrictions on the allowable address for the primitive data types, requiring that the address for some objects must be a multiple of some value K(typically2,4,or 8). Such alignment restrictions simplify the design of the hardware forming the interface between the processor and the memory system. For example, suppose a processor always fetches 8 bytes from memory with an address that must be a multiple of 8. If we can guarantee that any double will be aligned to have its address be a multiple of 8, then the value can be read or written with a single memory operation. Otherwise, we may need to perform two memory accesses, since the object might be split scross two 8-byte memory blocks.
     //leaq instruction support only 8 bytes
-        tH
+        The x86-64 hardware will work correctly regardless of the alignment of data. However, Intel recommends that data be aligned to improve memory system performance. Their alignment rule is based on the principle that any primitive objects K bytes must  have an address that is a multiple of K. We can see that this rule leads to the following alignments:
+        K      Types
+        1       char
+        2       short
+        4       int,float
+        8       long,double, char *
 
+
+        Alignment is enforced by making sure taht every data type is organized and allocated in such a way that every object within the type satisfies its alignment restrictions. The compiler places directives in the assembly code indicating the desired alignment for global data. For example,
+        .align 8
+        This ensures that the data following it(in this case the start of the jump table) will start with an address that is a multiple of 8. Since each table entry is 8 bytes long, the successive elements will obey the 8-byte alignment restriction.
+            For code involving structures, the compiler may need to insert gaps in the field allocation to ensure that each structure element satisfies its alignement requirement. The structure will then have some required alignment for its starting address.
+    For example, consider the structure declaration
+
+    struct S1{
+        int i;
+        char c;
+        int j;
+    }
+
+    
+
+
+3.10.5 Supporting Variable-Size Stack Frames
+
+We have examined the machine-level code for a variety of functions so far, but they all have the property that the compiler can 
 
 
 
