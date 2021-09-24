@@ -37,6 +37,14 @@ eg. mvn clean, Maven会自动执行clean生命周期,并执行到clean phase
 所以,我们使用mvn这个命令时,后面的参数是phase,Maven自动根据生命周期运行到指定的phase。
 
 eg. mvn clean install, Maven先执行clean生命周期到clean phase,再执行default生命周期到install phase
+=============================== 
+不常用的lifecycle site
+Phase	         Description
+pre-site	     execute processes needed prior to the actual project site generation
+site	         generate the project's site documentation
+post-site	     execute processes needed to finalize the site generation, and to prepare for site deployment
+site-deploy	     deploy the generated site documentation to the specified web server
+
 
 ===============================
 Goal
